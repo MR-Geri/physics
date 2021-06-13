@@ -8,11 +8,11 @@ from time import time
 
 
 class DoublePendulum:
-    def __init__(self, init_state=None, L1=1.0, L2=1.0, M1=1.0, M2=1.0, G=9.8, origin=(0, 0)):
+    def __init__(self, init_state=None, l1=1.0, l2=1.0, m1=1.0, m2=1.0, g=9.8, origin=(0, 0)):
         if init_state is None:
             init_state = [120, 0, -20, 0]
         self.init_state = np.asarray(init_state, dtype='float')
-        self.params = (L1, L2, M1, M2, G)
+        self.params = (l1, l2, m1, m2, g)
         self.origin = origin
         self.time_elapsed = 0
         self.state = self.init_state * np.pi / 180.
@@ -107,11 +107,12 @@ def animate(i):
     return line, time_text, energy_text
 
 
-# choose the interval based on dt and the time to animate one step
-t0 = time()
-animate(0)
-t1 = time()
-interval = 1000 * dt - (t1 - t0)
-#
-ani = animation.FuncAnimation(fig, animate, frames=600, interval=interval, blit=True, init_func=init)
-ani.save('double_pendulum_new.mp4', fps=60, extra_args=['-vcodec', 'libx264'])
+if __name__ == '__main__':
+    # choose the interval based on dt and the time to animate one step
+    t0 = time()
+    animate(0)
+    t1 = time()
+    interval = 1000 * dt - (t1 - t0)
+    #
+    ani = animation.FuncAnimation(fig, animate, frames=600, interval=interval, blit=True, init_func=init)
+    ani.save('double_pendulum_new.mp4', fps=60, extra_args=['-vcodec', 'libx264'])
